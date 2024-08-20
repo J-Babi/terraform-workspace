@@ -1,7 +1,7 @@
-output "instance_ids" {
- description = "The IDs of the EC2 instances in the Auto Scaling group."
- value       = aws_autoscaling_group.asg.instance_ids
-}
+#output "instance_ids" {
+# description = "The IDs of the EC2 instances in the Auto Scaling group."
+# value       = aws_autoscaling_group.asg.instance_ids
+#}
 
 output "availability_zones" {
   description = "The availability zones of the EC2 instances in the Auto Scaling group."

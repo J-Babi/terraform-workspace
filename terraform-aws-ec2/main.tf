@@ -6,7 +6,7 @@ provider "aws" {
 #    }
 }
 
-module "terraform-aws-ec2" {
+#module "terraform-aws-ec2" {
 #  source  = "tfe.rogers.com/aws"
 #  source  = "RogersCommunications/rsm_aws_deployment/development/DEV/terraform-aws-ec2"
 #  version = "1.0.1"
@@ -57,13 +57,13 @@ resource "aws_security_group" "cobra" {
 # Launch Template for EC2 Instance (initial size)
 resource "aws_launch_template" "lt_medium" {
   name_prefix    = "lt-medium-"
-  image_id       = var.ami_id
+  image_id	 = var.ami_id
   instance_type  = var.medium_instance_type
-  key_name       = var.key_name
+  key_name	 = var.key_name
 
   network_interfaces {
-    subnet_id       = var.private_subnet_id
-#    subnet_id       = var.public_subnet_id
+#    subnet_id       = var.private_subnet_id
+    subnet_id       = var.public_subnet_id
     security_groups = [aws_security_group.cobra.id]
   }
 
@@ -85,13 +85,13 @@ resource "aws_launch_template" "lt_medium" {
 # Launch Template for EC2 Instance (larger size)
 resource "aws_launch_template" "lt_large" {
   name_prefix    = "lt-large-"
-  image_id       = var.ami_id
+  image_id	 = var.ami_id
   instance_type  = var.large_instance_type
-  key_name       = var.key_name
+  key_name	 = var.key_name
 
   network_interfaces {
-    subnet_id       = var.private_subnet_id
-#    subnet_id       = var.public_subnet_id
+#    subnet_id       = var.private_subnet_id
+    subnet_id       = var.public_subnet_id
     security_groups = [aws_security_group.cobra.id]
   }
 
@@ -116,8 +116,8 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity          = 1
   max_size                  = 1
   min_size                  = 1
-  vpc_zone_identifier       = [var.private_subnet_id]
-#  vpc_zone_identifier       = [var.public_subnet_id]
+#  vpc_zone_identifier       = [var.private_subnet_id]
+  vpc_zone_identifier       = [var.public_subnet_id]
   health_check_type         = "EC2"
   health_check_grace_period = 300
   launch_template {
@@ -189,3 +189,4 @@ resource "aws_cloudwatch_metric_alarm" "low_cpu" {
 
   alarm_actions = [aws_autoscaling_policy.scale_down.arn]
 }
+

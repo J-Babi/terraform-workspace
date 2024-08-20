@@ -7,7 +7,8 @@
 variable "ami_id" {
   description = "The AMI ID to use for the instance."
   type        = string
-  default     = "ami-0583d8c7a9c35822c" # Red Hat AMI for ca-central-1 region
+#  default     = "ami-0583d8c7a9c35822c" # Red Hat AMI for ca-central-1 region
+  default     = "ami-0775d166d9bde92c8" # Red Hat AMI for ca-central-1 region
 }
 
 variable "medium_instance_type" {
@@ -30,20 +31,22 @@ variable "key_name" {
 variable "vpc_id" {
   description = "The VPC ID where the instance will be deployed."
   type        = string
-  default     = "vpc-0f0874df52bf77d9a"
+#  default     = "vpc-0f0874df52bf77d9a"
+  default     = "vpc-06fcc66e"
 }
 
-variable "private_subnet_id" {
-  description = "The private subnet ID in which to launch the instance."
-  type        = string
-  default     = "rsm-dev-private-1a"
-}
-
-#variable "public_subnet_id" {
-#  description = "The public subnet ID in which to launch the instance."
+#variable "private_subnet_id" {
+#  description = "The private subnet ID in which to launch the instance."
 #  type        = string
-#  default     = "rsm-dev-public-1a"
+#  default     = "rsm-dev-private-1a"
 #}
+
+variable "public_subnet_id" {
+  description = "The public subnet ID in which to launch the instance."
+  type        = string
+#  default     = "rsm-dev-public-1a"
+  default     = "ca-central-1a"
+}
 
 variable "instance_name" {
   description = "The name tag for the instance."
@@ -66,6 +69,7 @@ variable "region" {
   description = "The AWS region to deploy the instance."
   type        = string
   default     = "ca-central-1"
+#  default     = "us-east-2"
 }
 
 variable "user_data" {
@@ -77,7 +81,8 @@ variable "user_data" {
 variable "cidr_block" {
   description = "The CIDR block to allow ingress traffic."
   type        = string
-  default     = "10.95.90.0/25"
+#  default     = "10.95.90.0/25"
+  default     = "172.31.0.0/16"
 }
 
 variable "cpu_high_threshold" {
